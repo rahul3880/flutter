@@ -1,0 +1,64 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+
+void main(){
+  runApp(
+    MaterialApp(
+      title: "Stateful Widget",
+      home: TempClass(),
+    )
+  );
+}
+
+class TempClass extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _TempClassState();
+  }
+
+}
+
+class _TempClassState extends State<TempClass>{
+  String dtf = "";
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+            "Temperature Convertor"
+        ),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          children: <Widget>[
+                TextField(
+                  onSubmitted: (String temperature){
+                    setState(() {
+                      int temp= int.parse(temperature);
+                      double d=(temp*1.8)+32;
+                      dtf=d.toStringAsFixed(3);
+                    });
+                  },
+                  decoration: InputDecoration(
+                    hintText: "Temperature in Degree Celcious"
+                  ),
+                ),
+            Padding(
+                  padding: EdgeInsets.all(20.0),
+                child: Text(
+                  "Temperature in Farenheit $dtf",
+                  style: TextStyle(fontSize: 20),
+
+                ) ,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+}
