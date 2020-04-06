@@ -1,0 +1,72 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+
+void main(){
+  runApp(
+    MaterialApp(
+      title: "Stateful Widget",
+      home: ReverseStringGenerator(),
+    )
+  );
+}
+
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class ReverseStringGenerator extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _ReverseStringGeneratorState();
+  }
+}
+
+class _ReverseStringGeneratorState extends State<ReverseStringGenerator>{
+  String reverseString="";
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Reverse String Generator",
+        ),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          children: <Widget>[
+            TextField(
+              onSubmitted: (String userString){
+                setState(() {
+                  reverseString=reverse(userString);
+                });
+              },
+            ),
+            Padding(
+                padding: EdgeInsets.all(20.0),
+            child: Text(
+              "Reverse String of the given String is $reverseString",
+              style: TextStyle(fontSize: 20.0),
+            ),
+            )
+
+          ],
+        ),
+      ),
+    );
+  }
+  String reverse(String string) {
+    if (string == null) {
+      throw ArgumentError("string: $string");
+    }
+
+    if (string.length < 2) {
+      return string;
+    }
+
+    return String.fromCharCodes(string.codeUnits.reversed);
+  }
+}
